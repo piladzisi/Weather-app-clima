@@ -11,12 +11,8 @@ import UIKit
 
 class WeatherViewController: UIViewController {
     
-    //Constants
-    let WEATHER_URL = "http://api.openweathermap.org/data/2.5/weather"
-    let APP_ID = "5d3c281f8b7ece9515e8f1dac20c6b1b"
-    
-    //TODO: Declare instance variables here
-    
+    var weatherApi = WeatherApi()
+    var weather: Weather!
 
     @IBOutlet weak var weatherIcon: UIImageView!
     @IBOutlet weak var cityLabel: UILabel!
@@ -25,51 +21,44 @@ class WeatherViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        //TODO:Set up the location manager here.
-    
-        
-        
+        let url = WEATHER_URL
+        getCurrentWeather(url: url)
     }
     
+        func getCurrentWeather(url: String) {
+            weatherApi.getWeatherData(url: url) { (res) in
+                switch res {
+                case .success(let weather):
+                    self.setupView(weather: weather)
+                    self.weather = weather
+                case .failure(let err):
+                    print("Failed to fetch weather:", err)
+                }
+            }
+    }
     
-    
-    //MARK: - Networking
-    /***************************************************************/
-    
-    //Write the getWeatherData method here:
-    
-
-    
-    
-    
-    
-    
-    //MARK: - JSON Parsing
-    /***************************************************************/
-   
+        func setupView(weather: Weather) {
+            cityLabel.text = weather.city
+            temperatureLabel.text = String(weather.temp)
+          
+        }
+ 
     
     //Write the updateWeatherData method here:
-    
-
-    
-    
-    
-    //MARK: - UI Updates
-    /***************************************************************/
-    
-    
-    //Write the updateUIWithWeatherData method here:
-    
-    
-    
     
     
     
     //MARK: - Location Manager Delegate Methods
     /***************************************************************/
     
+        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            
+            if var destination = segue.destination as? WeatherViewController {
+                destination.weather = weather
+            }
+            
+        }
+}
     
     //Write the didUpdateLocations method here:
     
@@ -94,7 +83,6 @@ class WeatherViewController: UIViewController {
     
     
     
-    
-}
+
 
 

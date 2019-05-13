@@ -8,9 +8,10 @@
 
 import UIKit
 
-class WeatherDataModel {
-
-    //Declare your model variables here
+    struct Weather: Decodable {
+        let temp: Int
+        let city: String
+    }
     
     
     //This method turns a condition code into the name of the weather condition image
@@ -57,4 +58,4 @@ class WeatherDataModel {
 //        }
 //
 //    }
-}
+
