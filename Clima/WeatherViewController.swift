@@ -7,13 +7,16 @@
 //
 
 import UIKit
+import CoreLocation
 
-
-class WeatherViewController: UIViewController {
+class WeatherViewController: UIViewController, CLLocationManagerDelegate {
+    
+    
     
     var weatherApi = WeatherApi()
     var weather: Weather!
-
+    let locationManager = CLLocationManager()
+    
     @IBOutlet weak var weatherIcon: UIImageView!
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
@@ -21,6 +24,12 @@ class WeatherViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        locationManager.requestWhenInUseAuthorization()
+        
+        
         let url = WEATHER_URL
         getCurrentWeather(url: url)
     }
