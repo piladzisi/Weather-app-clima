@@ -19,6 +19,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     var weather: Weather!
     
     let locationManager = CLLocationManager()
+    let weatherDataModel = WeatherDataModel()
     
     @IBOutlet weak var weatherIcon: UIImageView!
     @IBOutlet weak var cityLabel: UILabel!
@@ -80,10 +81,27 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     //Write the updateWeatherData method here:
     
     func updateWeatherData(json: JSON) {
-
-        let tempResults = json["base"]
-        print(tempResults)
+        if let tempResults = json["main"]["temp"].double {
+        weatherDataModel.temperature = Int(tempResults - 273.15)
+        weatherDataModel.city = json["name"].stringValue
+        weatherDataModel.condition = json["weather"][0]["id"].intValue
+        weatherDataModel.weatherIconName = weatherDataModel.updateWeatherIcon(condition: weatherDataModel.condition)
+            
+        updateUIWithWeatherData()
+        }
+        else {
+            cityLabel.text = "Weather Unavailable"
+        }
     }
+    
+    //MARK: - UI Updates
+    
+    func updateUIWithWeatherData() {
+        cityLabel.text = weatherDataModel.city
+        temperatureLabel.text = String(weatherDataModel.temperature)
+        weatherIcon.image = UIImage(named: weatherDataModel.weatherIconName)
+    }
+    
     
     
     //MARK: - Location Manager Delegate Methods
@@ -103,6 +121,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
             let longitude = String(location.coordinate.longitude)
             
             let params: [String: String] = ["lat": latitude, "lon": longitude, "appid": APP_ID]
+            print(params)
             getWeatherData(url: WEATHER_URL, parameters: params)
 //            getWeatherData(url: WEATHER_URL, parameters: params) { (res) in
 //                switch res {
