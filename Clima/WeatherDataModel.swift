@@ -9,8 +9,10 @@
 import UIKit
 
     struct Weather: Decodable {
-        let temp: Int
+        let temperature: Int
+        let condition: Int
         let city: String
+        let weatherIconName: String
     }
     
     
