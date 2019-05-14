@@ -13,6 +13,7 @@ import SwiftyJSON
 class WeatherApi {
     
     
+    
     }
     
     //Codable

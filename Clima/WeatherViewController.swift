@@ -15,8 +15,9 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     
    fileprivate let APP_ID = "5d3c281f8b7ece9515e8f1dac20c6b1b"
     
-   //  var weatherApi = WeatherApi()
-    //var weather: Weather!
+    var weatherApi = WeatherApi()
+    var weather: Weather!
+    
     let locationManager = CLLocationManager()
     
     @IBOutlet weak var weatherIcon: UIImageView!
@@ -30,36 +31,44 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
-        
-       
-//        weatherApi.getWeatherData(at: Coordinate.alcatrazIsland) { (res) in
-//                            switch res {
-//                            case .success(let weather):
-//                                //self.setupView(weather: weather)
-//                                //self.weather = weather
-//                                print("Success! Got the weather data")
-//                            case .failure(let err):
-//                                print("Failed to fetch weather:", err)
-//                            }
-        
- 
-//        func setupView(weather: Weather) {
-//            cityLabel.text = weather.wind
-//       }
- 
     }
     
-    //getWeatherData method:
     
+    //getWeatherData method Codable:
+    
+//    func getWeatherData(url: String, parameters: [String: String], completion: @escaping (Result <Weather, Error>) -> ()) {
+//       guard let url = URL(string: "\(WEATHER_URL)") else { return }
+//        URLSession.shared.dataTask(with: url) { (data, resp, err) in
+//            if let err = err {
+//                completion(.failure(err))
+//            }
+//            do {
+//                let data = data
+//                print("success:\(data) \(url)")
+//                let weather = try JSONDecoder().decode(Weather.self, from: data!)
+//                DispatchQueue.main.async {
+//                    completion(.success(weather))
+//                    print(weather)
+//                }
+//            } catch let jsonError {
+//                completion(.failure(jsonError))
+//            }
+//        } .resume()
+//    }
+
+               // self.cityLabel.text = "Connection Issues"
+   
+
+
+   // getWeatherData method Alamofire and SwiftyJSON:
+
     func getWeatherData(url: String, parameters: [String: String]) {
-        
+
         Alamofire.request(url, method: .get, parameters: parameters).responseJSON {
             response in
             if response.result.isSuccess {
-                
                 let weatherJSON: JSON = JSON(response.result.value!)
-                print(weatherJSON)
-                
+                self.updateWeatherData(json: weatherJSON)
             }
             else {
                 print("Error \(String(describing: response.result.error))")
@@ -67,8 +76,14 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
             }
         }
     }
+    
     //Write the updateWeatherData method here:
     
+    func updateWeatherData(json: JSON) {
+
+        let tempResults = json["base"]
+        print(tempResults)
+    }
     
     
     //MARK: - Location Manager Delegate Methods
@@ -88,12 +103,17 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
             let longitude = String(location.coordinate.longitude)
             
             let params: [String: String] = ["lat": latitude, "lon": longitude, "appid": APP_ID]
-           
             getWeatherData(url: WEATHER_URL, parameters: params)
-            
-         }
-    
-    }
+//            getWeatherData(url: WEATHER_URL, parameters: params) { (res) in
+//                switch res {
+//                case .success(let weather):
+//                    self.weather = weather
+//                case .failure(let err):
+//                    print("Failed to fetch weather:", err)
+//                }
+//            }
+          }
+  
     
     //Write the didFailWithError method here:
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -121,3 +141,4 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
 
 
 
+}
