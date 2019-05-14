@@ -18,6 +18,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, Change
     let locationManager = CLLocationManager()
     let weatherDataModel = WeatherDataModel()
     
+    @IBOutlet weak var celciusSwitch: UISwitch!
     @IBOutlet weak var weatherIcon: UIImageView!
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
@@ -95,7 +96,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, Change
     
     func updateUIWithWeatherData() {
         cityLabel.text = weatherDataModel.city
-        temperatureLabel.text = String(weatherDataModel.temperature)
+        temperatureLabel.text = String(weatherDataModel.temperature)+"°"
         weatherIcon.image = UIImage(named: weatherDataModel.weatherIconName)
     }
     
@@ -160,5 +161,14 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, Change
         }
     }
  
-
+    @IBAction func celciusSwitchClicked(_ sender: Any) {
+        
+        if celciusSwitch.isOn {
+            temperatureLabel.text = String(weatherDataModel.temperature * 9/5 + 32)+"℉"
+        
+        } else {
+            temperatureLabel.text = String(weatherDataModel.temperature)+"℃"
+        }
+    }
+    
 }
