@@ -11,12 +11,9 @@ import CoreLocation
 import Alamofire
 import SwiftyJSON
 
-class WeatherViewController: UIViewController, CLLocationManagerDelegate {
+class WeatherViewController: UIViewController, CLLocationManagerDelegate, ChangeCityDelegate {
     
    fileprivate let APP_ID = "5d3c281f8b7ece9515e8f1dac20c6b1b"
-    
-    var weatherApi = WeatherApi()
-    var weather: Weather!
     
     let locationManager = CLLocationManager()
     let weatherDataModel = WeatherDataModel()
@@ -121,8 +118,8 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
             let longitude = String(location.coordinate.longitude)
             
             let params: [String: String] = ["lat": latitude, "lon": longitude, "appid": APP_ID]
-            print(params)
             getWeatherData(url: WEATHER_URL, parameters: params)
+            
 //            getWeatherData(url: WEATHER_URL, parameters: params) { (res) in
 //                switch res {
 //                case .success(let weather):
@@ -132,32 +129,36 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
 //                }
 //            }
           }
-  
+    }
     
     //Write the didFailWithError method here:
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
         cityLabel.text = "Location Unavailable"
     }
-}
+
     
 
     
     //MARK: - Change City Delegate methods
-    /***************************************************************/
-    
-    
-    //Write the userEnteredANewCityName Delegate method here:
-    
 
     
-    //Write the PrepareForSegue Method here
+    func userEnteredNewCity(city: String) {
+        let params: [String : String] = ["q" : city, "appid" : APP_ID]
+        getWeatherData(url: WEATHER_URL, parameters: params)
+    }
+   
     
-    
-    
-    
-
-
-
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "changeCityName" {
+            
+            let destinationVC = segue.destination as! ChangeCityViewController
+            
+            destinationVC.delegate = self
+            
+        }
+    }
+ 
 
 }
