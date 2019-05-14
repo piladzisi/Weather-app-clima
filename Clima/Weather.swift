@@ -8,12 +8,16 @@
 
 import Foundation
 
+struct Main: Decodable {
+    let main: Int
+}
+
 struct Weather: Decodable {
-    let name: String
-    //        let condition: Int
-    //        let city: String
-    //        let weatherIconName: String
-    
+    let temperature: Int
+    let condition: Int
+    let city: String
+    let weatherIconName: String
+}
     
     //
     //    init(model: CurrentWeather) {
@@ -28,7 +32,7 @@ struct Weather: Decodable {
     //
     //        self.summary = model.summary
     //        self.icon = model.iconImage
-}
+
 
 
 

@@ -10,6 +10,7 @@ import UIKit
 import CoreLocation
 import Alamofire
 import SwiftyJSON
+import Charts
 
 class WeatherViewController: UIViewController, CLLocationManagerDelegate, ChangeCityDelegate {
     
@@ -22,7 +23,8 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, Change
     @IBOutlet weak var weatherIcon: UIImageView!
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
-
+    @IBOutlet weak var humidityLabel: UILabel!
+    @IBOutlet weak var pieChart: PieChartView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,36 +33,10 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, Change
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
         celciusSwitch.isOn = false
+        
     }
-    
-    
-    //getWeatherData method Codable:
-    
-//    func getWeatherData(url: String, parameters: [String: String], completion: @escaping (Result <Weather, Error>) -> ()) {
-//       guard let url = URL(string: "\(WEATHER_URL)") else { return }
-//        URLSession.shared.dataTask(with: url) { (data, resp, err) in
-//            if let err = err {
-//                completion(.failure(err))
-//            }
-//            do {
-//                let data = data
-//                print("success:\(data) \(url)")
-//                let weather = try JSONDecoder().decode(Weather.self, from: data!)
-//                DispatchQueue.main.async {
-//                    completion(.success(weather))
-//                    print(weather)
-//                }
-//            } catch let jsonError {
-//                completion(.failure(jsonError))
-//            }
-//        } .resume()
-//    }
-
-               // self.cityLabel.text = "Connection Issues"
-   
-
-
-   // getWeatherData method Alamofire and SwiftyJSON:
+  
+ // getWeatherData method Alamofire and SwiftyJSON:
 
     func getWeatherData(url: String, parameters: [String: String]) {
 
@@ -80,13 +56,15 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, Change
     //Write the updateWeatherData method here:
     
     func updateWeatherData(json: JSON) {
-        if let tempResults = json["main"]["temp"].double {
+        if let tempResults = json["main"]["temp"].double, let humidityResults = json["main"]["humidity"].double {
         weatherDataModel.temperature = Int(tempResults - 273.15)
+        weatherDataModel.humidity = Int(humidityResults)
         weatherDataModel.city = json["name"].stringValue
         weatherDataModel.condition = json["weather"][0]["id"].intValue
         weatherDataModel.weatherIconName = weatherDataModel.updateWeatherIcon(condition: weatherDataModel.condition)
             
         updateUIWithWeatherData()
+        pieChartUpdate()
         }
         else {
             cityLabel.text = "Weather Unavailable"
@@ -99,15 +77,13 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, Change
         cityLabel.text = weatherDataModel.city
         temperatureLabel.text = String(weatherDataModel.temperature)+"℃"
         weatherIcon.image = UIImage(named: weatherDataModel.weatherIconName)
+        humidityLabel.text = String(weatherDataModel.humidity)+"%"
     }
     
     
     
     //MARK: - Location Manager Delegate Methods
-    /***************************************************************/
-    
-    //Write the didUpdateLocations method here:
-    
+   
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations[locations.count - 1]
        
@@ -121,28 +97,16 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, Change
             
             let params: [String: String] = ["lat": latitude, "lon": longitude, "appid": APP_ID]
             getWeatherData(url: WEATHER_URL, parameters: params)
-            
-//            getWeatherData(url: WEATHER_URL, parameters: params) { (res) in
-//                switch res {
-//                case .success(let weather):
-//                    self.weather = weather
-//                case .failure(let err):
-//                    print("Failed to fetch weather:", err)
-//                }
-//            }
           }
     }
     
-    //Write the didFailWithError method here:
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+   func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
         cityLabel.text = "Location Unavailable"
     }
 
     
-
-    
-    //MARK: - Change City Delegate methods
+  //MARK: - Change City Delegate methods
 
     
     func userEnteredNewCity(city: String) {
@@ -150,26 +114,25 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, Change
         getWeatherData(url: WEATHER_URL, parameters: params)
     }
    
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "changeCityName" {
-            
             let destinationVC = segue.destination as! ChangeCityViewController
-            
             destinationVC.delegate = self
             
         }
     }
  
     @IBAction func celciusSwitchClicked(_ sender: Any) {
-        
         if celciusSwitch.isOn {
             temperatureLabel.text = String(weatherDataModel.temperature * 9/5 + 32)+"℉"
-        
         } else {
             temperatureLabel.text = String(weatherDataModel.temperature)+"℃"
         }
     }
     
+    //MARK Charts
+    func pieChartUpdate() {
+        
+    }
 }
