@@ -119,7 +119,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, Change
         if segue.identifier == "changeCityName" {
             let destinationVC = segue.destination as! ChangeCityViewController
             destinationVC.delegate = self
-            
+            celciusSwitch.isOn = false
         }
     }
  
@@ -133,6 +133,29 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, Change
     
     //MARK Charts
     func pieChartUpdate() {
+        let humidity = weatherDataModel.humidity
+        let entry1 = PieChartDataEntry(value: Double(100-humidity))
+        let entry2 = PieChartDataEntry(value: Double(humidity))
+        let dataSet = PieChartDataSet(entries: [entry1, entry2], label: "")
+        let data = PieChartData(dataSet: dataSet)
+        pieChart.data = data
         
+        
+        //All other additions to this function will go here
+        dataSet.colors = ChartColorTemplates.liberty()
+        pieChart.holeColor = UIColor.clear
+        dataSet.drawValuesEnabled = false
+        pieChart.legend.enabled = false
+        dataSet.colors[0] = UIColor.white
+        dataSet.colors[1] = UIColor.cyan
+       
+        //pieChart.holeRadiusPercent = 70
+       
+        
+        // increase width
+        // width in excess of the parentView.size.width will cause layout issues
+        pieChart.frame.size = CGSize(width: 500, height: pieChart.frame.size.height)
+        //This must stay at end of function
+        pieChart.notifyDataSetChanged()
     }
 }
