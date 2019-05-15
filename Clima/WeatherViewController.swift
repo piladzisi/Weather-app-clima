@@ -150,7 +150,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, Change
         
         
         
-        let myAttribute = [ NSAttributedString.Key.font: UIFont(descriptor: UIFontDescriptor(fontAttributes: [UIFontDescriptor.AttributeName.family: "Futura"]), size: 22.0) ]
+        let myAttribute = [ NSAttributedString.Key.font: UIFont(descriptor: UIFontDescriptor(fontAttributes: [UIFontDescriptor.AttributeName.family: "HelveticaNeue-Thin"]), size: 30.0), NSAttributedString.Key.foregroundColor: UIColor.white ]
        
         let myAttrString = NSAttributedString(string: "\(humidity)%", attributes: myAttribute)
         
