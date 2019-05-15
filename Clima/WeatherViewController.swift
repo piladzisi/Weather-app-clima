@@ -77,8 +77,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, Change
         cityLabel.text = weatherDataModel.city
         temperatureLabel.text = String(weatherDataModel.temperature)+"℃"
         weatherIcon.image = UIImage(named: weatherDataModel.weatherIconName)
-        humidityLabel.text = String(weatherDataModel.humidity)+"%"
-    }
+   }
     
     
     
@@ -146,15 +145,27 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, Change
         pieChart.holeColor = UIColor.clear
         dataSet.drawValuesEnabled = false
         pieChart.legend.enabled = false
-        dataSet.colors[0] = UIColor.white
-        dataSet.colors[1] = UIColor.cyan
+        dataSet.colors[0] = UIColor.white.withAlphaComponent(0.8)
+        dataSet.colors[1] = UIColor(red: 90/255.0, green: 200/255.0, blue: 250/255.0, alpha: 0.8)
+        
+        
+        
+        let myAttribute = [ NSAttributedString.Key.font: UIFont(descriptor: UIFontDescriptor(fontAttributes: [UIFontDescriptor.AttributeName.family: "Futura"]), size: 22.0) ]
        
-        //pieChart.holeRadiusPercent = 70
+        let myAttrString = NSAttributedString(string: "\(humidity)%", attributes: myAttribute)
+        
        
+        pieChart.centerAttributedText = myAttrString;
+        pieChart.holeRadiusPercent = CGFloat(0.92)
+        
+        
+        //let myAttrString = NSAttributedString(string: "My String", attributes: myAttribute)
+        
+       // chart.centerAttributedText = myAttrString
         
         // increase width
         // width in excess of the parentView.size.width will cause layout issues
-        pieChart.frame.size = CGSize(width: 500, height: pieChart.frame.size.height)
+        //pieChart.frame.size = CGSize(width: 20, height: pieChart.frame.size.height)
         //This must stay at end of function
         pieChart.notifyDataSetChanged()
     }

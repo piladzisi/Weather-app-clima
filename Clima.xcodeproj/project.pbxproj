@@ -11,10 +11,10 @@
 		4F6CA0C122897113009E2616 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6CA0C022897113009E2616 /* Constants.swift */; };
 		4F6CA0C32289AE7E009E2616 /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6CA0C22289AE7E009E2616 /* Coordinate.swift */; };
 		4FCB0928228AC0B80091E24A /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCB0927228AC0B80091E24A /* Weather.swift */; };
+		4FD2F4BF228C295300EA38BE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FD2F4BE228C295300EA38BE /* Images.xcassets */; };
 		63E28AD11B99C32400FBF6E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E28AD01B99C32400FBF6E0 /* AppDelegate.swift */; };
 		63E28AF11B99C35700FBF6E0 /* WeatherDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E28AF01B99C35700FBF6E0 /* WeatherDataModel.swift */; };
 		63E28AF61B99C36100FBF6E0 /* ChangeCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E28AF21B99C36100FBF6E0 /* ChangeCityViewController.swift */; };
-		63E28AF71B99C36100FBF6E0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63E28AF31B99C36100FBF6E0 /* Images.xcassets */; };
 		63E28AF81B99C36100FBF6E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63E28AF41B99C36100FBF6E0 /* Main.storyboard */; };
 		63E28AF91B99C36100FBF6E0 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E28AF51B99C36100FBF6E0 /* WeatherViewController.swift */; };
 		63E28AFF1B99C3B300FBF6E0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63E28AFE1B99C3B300FBF6E0 /* LaunchScreen.xib */; };
@@ -28,12 +28,12 @@
 		4F6CA0C022897113009E2616 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4F6CA0C22289AE7E009E2616 /* Coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
 		4FCB0927228AC0B80091E24A /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		4FD2F4BE228C295300EA38BE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Clima/Images.xcassets; sourceTree = "<group>"; };
 		63E28ACB1B99C32400FBF6E0 /* Clima.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Clima.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63E28ACF1B99C32400FBF6E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63E28AD01B99C32400FBF6E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63E28AF01B99C35700FBF6E0 /* WeatherDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherDataModel.swift; sourceTree = "<group>"; };
 		63E28AF21B99C36100FBF6E0 /* ChangeCityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeCityViewController.swift; sourceTree = "<group>"; };
-		63E28AF31B99C36100FBF6E0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		63E28AF41B99C36100FBF6E0 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		63E28AF51B99C36100FBF6E0 /* WeatherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
 		63E28AFE1B99C3B300FBF6E0 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
@@ -79,6 +79,7 @@
 				AD05C7BD20EBD80D00915CD8 /* README.md */,
 				63E28ACD1B99C32400FBF6E0 /* Clima */,
 				63E28ACC1B99C32400FBF6E0 /* Products */,
+				4FD2F4BE228C295300EA38BE /* Images.xcassets */,
 				5ECAB344D309709C6EBB48F2 /* Pods */,
 				CCA16579F5EBBFB7899FC77B /* Frameworks */,
 			);
@@ -99,7 +100,6 @@
 				63E28AFD1B99C38100FBF6E0 /* View */,
 				63E28AFB1B99C37500FBF6E0 /* Controller */,
 				4F6CA0BD22897035009E2616 /* Services */,
-				63E28AF31B99C36100FBF6E0 /* Images.xcassets */,
 				63E28AFE1B99C3B300FBF6E0 /* LaunchScreen.xib */,
 				63E28ACE1B99C32400FBF6E0 /* Supporting Files */,
 			);
@@ -211,8 +211,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63E28AF71B99C36100FBF6E0 /* Images.xcassets in Resources */,
 				63E28AFF1B99C3B300FBF6E0 /* LaunchScreen.xib in Resources */,
+				4FD2F4BF228C295300EA38BE /* Images.xcassets in Resources */,
 				AD05C7BE20EBD80E00915CD8 /* README.md in Resources */,
 				63E28AF81B99C36100FBF6E0 /* Main.storyboard in Resources */,
 			);
