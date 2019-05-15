@@ -28,8 +28,8 @@ class ChangeCityViewController: UIViewController {
         blurView.alpha = 0.4
         getWeatherButton.layer.borderWidth = 1
         getWeatherButton.layer.borderColor = UIColor.white.cgColor
-        getWeatherButton.layer.cornerRadius = 15
-        changeCityTextField.layer.cornerRadius = 15
+        getWeatherButton.layer.cornerRadius = getWeatherButton.frame.height/3
+        changeCityTextField.layer.cornerRadius = changeCityTextField.frame.height/2.4
         
     }
  
