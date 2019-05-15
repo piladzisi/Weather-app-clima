@@ -15,47 +15,24 @@ protocol ChangeCityDelegate {
 }
 
 class ChangeCityViewController: UIViewController {
-    
     var delegate: ChangeCityDelegate?
     
     @IBOutlet weak var changeCityTextField: UITextField!
-    
     @IBOutlet weak var backgroundImage: UIImageView!
-   
+    @IBOutlet weak var blurView: UIView!
+    @IBOutlet weak var getWeatherButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        activateLayoutConstraints()
+        blurView.backgroundColor = .black
+        blurView.alpha = 0.4
+        getWeatherButton.layer.borderWidth = 1
+        getWeatherButton.layer.borderColor = UIColor.white.cgColor
+        getWeatherButton.layer.cornerRadius = 15
+        changeCityTextField.layer.cornerRadius = 15
         
     }
-    
-    
-    func activateLayoutConstraints(){
-        let blur = UIBlurEffect(style: .regular)
-        let blurView = UIVisualEffectView(effect: blur)
-        blurView.alpha = 0.5
-        //blurView.frame = backgroundImage.frame
-        
-        if #available(iOS 11, *) {
-            let guide = view.safeAreaLayoutGuide
-            
-            NSLayoutConstraint.activate([
-                blurView.bottomAnchor.constraint(equalTo: guide.bottomAnchor),
-                blurView.rightAnchor.constraint(equalTo: guide.rightAnchor),
-                blurView.topAnchor.constraint(equalTo: guide.topAnchor),
-                blurView.leftAnchor.constraint(equalTo: guide.leftAnchor)
-                ])
-        } else {
-            NSLayoutConstraint.activate([
-                blurView.bottomAnchor.constraint(equalTo: bottomLayoutGuide.bottomAnchor),
-                blurView.rightAnchor.constraint(equalTo: view.rightAnchor),
-                blurView.topAnchor.constraint(equalTo: topLayoutGuide.topAnchor),
-                blurView.leftAnchor.constraint(equalTo: view.leftAnchor)
-                ])
-            backgroundImage.addSubview(blurView)
-        }
-    }
-    
+ 
     @IBAction func getWeatherPressed(_ sender: AnyObject) {
       
        let cityName = changeCityTextField.text!
