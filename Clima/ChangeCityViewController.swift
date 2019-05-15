@@ -20,6 +20,21 @@ class ChangeCityViewController: UIViewController {
     
     @IBOutlet weak var changeCityTextField: UITextField!
     
+    @IBOutlet weak var backgroundImage: UIImageView!
+   
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        
+        let blur = UIBlurEffect(style: .regular)
+        let blurView = UIVisualEffectView(effect: blur)
+        blurView.alpha = 0.5
+        blurView.frame = backgroundImage.bounds
+        backgroundImage.addSubview(blurView)
+        
+    }
+    
+    
     @IBAction func getWeatherPressed(_ sender: AnyObject) {
       
        let cityName = changeCityTextField.text!

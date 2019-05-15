@@ -142,7 +142,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cityBackground" translatesAutoresizingMaskIntoConstraints="NO" id="CrA-Xh-KLm" userLabel="Background Image View">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="close-up-dark-dirty-592753" translatesAutoresizingMaskIntoConstraints="NO" id="CrA-Xh-KLm" userLabel="Background Image View">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <color key="backgroundColor" red="0.45138680930000002" green="0.99309605359999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
@@ -209,6 +209,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="SGE-7i-E75"/>
                     <connections>
+                        <outlet property="backgroundImage" destination="CrA-Xh-KLm" id="BYs-F9-dfh"/>
                         <outlet property="changeCityTextField" destination="0F0-ob-gbM" id="RJQ-WZ-AQ3"/>
                     </connections>
                 </viewController>
@@ -219,7 +220,7 @@
     </scenes>
     <resources>
         <image name="background" width="500" height="755"/>
-        <image name="cityBackground" width="600" height="399.5"/>
+        <image name="close-up-dark-dirty-592753" width="4719" height="2303"/>
         <image name="left" width="32" height="32"/>
         <image name="switch" width="64" height="64"/>
     </resources>
